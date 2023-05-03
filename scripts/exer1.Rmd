@@ -19,16 +19,9 @@ ggplot(df,aes(x=condition,y=onset_latency,fill=condition)) +
   geom_boxplot() +
   ylim(0,3000)
 
-
 ggplot(df,aes(x=trialNum,y=onset_latency,color=condition)) +
   geom_point() +
   ylim(0,3000)
-
-
-
-
-
-
 
 ```
 
