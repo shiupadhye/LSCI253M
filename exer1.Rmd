@@ -1,0 +1,23 @@
+---
+title: "exer1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r visualize}
+library(tidyverse)
+
+df <- read_csv("data/fluent_trials_e1.csv")
+head(df)
+
+ggplot(df,aes(x=condition,y=onset_latency,fill=condition)) +
+  geom_boxplot() +
+  ylim(0,3000)
+
+```
+
