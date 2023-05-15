@@ -1,0 +1,56 @@
+---
+title: "Exercise"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## LSCI 253M Exercise
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+library(tidyverse)
+df <- read_csv("example_data_for_visualization.csv")
+head(df)
+```
+
+## Plots
+
+```{r}
+# reorder labels to form pairs
+df$label <- factor(df$label, levels = c("P", "B", "T", "D","K","G"))
+# plot
+ggplot(df,aes(x=label,y=cog,fill=label)) +
+  geom_boxplot(notch=TRUE) +
+  theme_classic()
+```
+
+The plot above shows the distribution of Center of Gravity (CoG) for voiceless/voiced pairs of word-initial stops. We observe that voiceless stops (/p/,/t/,and /k/) have longer CoGs than their voiced counterparts (/b/,/d/, and /g/).
+
+```{r}
+# reorder labels to form pairs
+df$pos <- factor(df$pos, levels = c("utt_init", "utt_mid", "prepause", "postpause","utt_final"))
+ggplot(df,aes(x=vdur,fill=vowel)) +
+  geom_density(alpha = 0.6) +
+  theme_classic() +
+  xlim(0,500)
+```
+
+The above plot shows the distribution of vowel durations
+
+```{r}
+df$pos <- factor(df$pos, levels = c("utt_init", "utt_mid", "prepause", "postpause","utt_final"))
+ggplot(df,aes(x=trial,y=usef0,color=gender)) +
+  geom_smooth() +
+  theme_classic()
+
+```
+
+The above plot shows the fundamental frequency (f0) across trials by gender. While there appears
+to be no difference in how f0 trends across trials, we observe that, on average, female participants
+had higher f0s.
