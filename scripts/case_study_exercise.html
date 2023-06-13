@@ -320,7 +320,7 @@ Average RTs by exposure condition in Experiment 1.
 <h4>Exposure</h4>
 <p>A linear mixed effects model was fit to adjusted RTs for correct responses during the exposure phase.</p>
 <p>Describe your fixed effects and random effects. Describe how each variable is coded.</p>
-<p>Dependent variable: adjusted RT (continuous) Fixed effects: Condition (categorical with two levels), Block (categorical, three levels) Random effects: Speaker, Word (both categorical)</p>
+<p>Dependent variable: adjusted RT (continuous) Fixed effects: Condition (categorical with two levels, reference level: control), Block (categorical with three levels, reference level: 1) Random effects: Speaker, Word (both categorical)</p>
 <pre class="r"><code># Model specification:
 # by-block analysis of RTs during EXPOSURE
 exp1_exposure &lt;- exp1 %&gt;%
@@ -393,7 +393,7 @@ summary(m.exp)</code></pre>
 </div>
 <div id="test" class="section level4">
 <h4>Test</h4>
-<p>Dependent variable: adjusted RT (continuous) Fixed effects: Condition (categorical with two levels) Random effects: Speaker, Word</p>
+<p>Dependent variable: adjusted RT (continuous) Fixed effects: Condition (categorical with two levels, reference level: control) Random effects: Speaker, Word</p>
 <pre class="r"><code># Model specification:
 # by-block analysis of RTs during TEST 
 exp1_test &lt;- exp1 %&gt;%
