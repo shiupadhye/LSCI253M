@@ -1,0 +1,54 @@
+---
+title: "Exercise"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## LSCI 253M Plotting exercise
+
+This documents contains plots for the data provided on the Canvas website.
+
+```{r}
+library(tidyverse)
+df <- read_csv("data/example_data_for_visualization.csv")
+head(df)
+```
+
+
+## Plots
+```{r viz-CoG-by-stop, fig.cap="Center of Gravity (CoG) for voiceless/voiced pairs of word-initial stops. We observe that voiceless stops (/p/,/t/,and /k/) have longer CoGs than their voiced counterparts (/b/,/d/, and /g/)."}
+
+# reorder labels to form pairs
+df$label <- factor(df$label, levels = c("P", "B", "T", "D","K","G"))
+# plot
+ggplot(df,aes(x=label,y=cog,fill=label)) +
+  geom_boxplot(notch=TRUE,show.legend = FALSE) +
+  ylab("CoG (Hz)") +
+  xlab("word-initial stop") + 
+  theme_classic() 
+```
+
+```{r viz-vowelDuration,fig.cap="Distribution of vowel durations",warning=FALSE}
+# reorder labels to form pairs
+df$pos <- factor(df$pos, levels = c("utt_init", "utt_mid", "prepause", "postpause","utt_final"))
+ggplot(df,aes(x=vdur,fill=vowel)) +
+  geom_density(alpha = 0.6) +
+  ylab("vowel duration (ms)") +
+  theme_classic() +
+  xlim(0,500)
+```
+
+```{r viz-F0-by-trial-uttrPos, fig.cap="Fundamental frequency (f0) across trials for different utterance positions"}
+df$pos <- factor(df$pos, levels = c("utt_init", "utt_mid", "prepause", "postpause","utt_final"))
+ggplot(df,aes(x=trial,y=usef0,color=gender)) +
+  geom_smooth() +
+  xlab("Trial number") +
+  ylab("f0 (Hz)") +
+  theme_classic()
+```
+
